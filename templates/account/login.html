@@ -1,0 +1,22 @@
+<!-- File: login.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/28/2026
+Description: File that contains the login page for the app  -->
+
+{% extends "project/base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+
+    <!-- initializing a card for the login message -->
+    <div class="auth-card">
+        <!-- heading for the login message -->
+        <h1>Sign In</h1>
+        <!-- subtitle for the login message -->
+        <p class="auth-subtitle">Use your BU Google account to continue.</p>
+        <!-- link to continue with Google login -->
+        <!-- button to continue with Google login -->
+        <a href="{% provider_login_url 'google' %}">
+            <button>Continue with Google</button>
+        </a>
+    </div>
+{% endblock %}

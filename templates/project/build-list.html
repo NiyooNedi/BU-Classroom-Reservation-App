@@ -1,0 +1,27 @@
+<!-- File: build-list.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/20/2026
+Description: File that contains the template that shows the list of buildings you can reserve a room in -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Buildings</h1>
+<hr>
+<!-- loop that iterates over all of the buildings in the database -->
+{% for building in buildings %}
+    <div>
+        <!-- shows the building's data: name, address, side of campus, room number, and open hours -->
+        <h3>{{ building.abr_name }}</h3>
+        <p>Address: {{ building.address }}</p>
+        <p>Side of Campus: {{ building.side_of_campus }}</p>
+        <p>Rooms: {{ building.num_rooms }}</p>
+        <p>Open: {{ building.opening_time }} - {{ building.closing_time }}</p>
+    </div>
+    <hr>
+<!-- in case no buildings are in db -->
+{% empty %}
+    <p>No buildings available.</p>
+{% endfor %}
+
+{% endblock %}

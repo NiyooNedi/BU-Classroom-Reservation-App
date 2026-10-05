@@ -1,0 +1,20 @@
+<!-- File: login_cancelled.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/28/2026
+Description: File that contains the template that is shown when a user cancels logging in -->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+    <!-- initializing a card for the login cancelled message -->
+    <div class="auth-card">
+        <h1>Login Cancelled</h1>
+        <p class="auth-subtitle">
+            You cancelled signing in with Google.
+        </p>
+
+        <!-- link to try again logging in with Google -->
+        <a href="{% url 'account_login' %}?next={{ request.path }}">
+            <button>Try Again</button>
+        </a>
+    </div>
+{% endblock %}

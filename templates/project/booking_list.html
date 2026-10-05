@@ -1,0 +1,51 @@
+<!-- File: booking-list.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/25/2026
+Description: File that contains the template that shows all of the current reservations -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Booking Calendar</h1>
+
+<!-- form for the user to filter the bookings by building, room, and date -->
+<form method="get" id="booking-filter-form" class="filter-bar">
+    <input type="text" name="building" placeholder="Building">
+    <input type="number" name="room" placeholder="Room number">
+    <input type="date" name="date">
+</form>
+<!-- buttons to search for bookings or clear the filters -->
+<div class="filter-actions">
+    <button type="submit" form="booking-filter-form">Search</button>
+    <a href="{% url 'booking_list' %}" class="clear-link button-secondary">Clear</a>
+</div>
+
+<!-- initializing a table for all of the bookings to be displayed in -->
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Room</th>
+        <th>User</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+
+    <!-- iterating over all of the bookings stored in the db -->
+    {% for booking in bookings %}
+        <tr>
+            <!-- showing all of the fields for each booking: start and end times, room, user -->
+            <td>{{ booking.start_time|date:"M d, Y" }}</td>
+            <td>{{ booking.room }}</td>
+            <td>{{ booking.user }}</td>
+            <td>{{ booking.start_time|time:"g:i A" }}</td>
+            <td>{{ booking.end_time|time:"g:i A" }}</td>
+        </tr>
+    <!-- in case there are no bookings -->
+    {% empty %}
+        <tr>
+            <td colspan="5">No bookings yet.</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

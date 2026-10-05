@@ -1,0 +1,27 @@
+<!-- File: booking-form.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/25/2026
+Description: File that contains the form for a user to book a room -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+    <div class="card">
+        <h1>Reserve a Room</h1>
+
+        <!-- if there are any errors, display them -->
+        {% if form.non_field_errors %}
+            <div class="error-box">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <!-- calling a HTTP method; POST, for the user to create a reservation -->
+        <form method="POST">
+            {% csrf_token %}
+            <!-- displaying the form for the user to input the data -->
+            {{ form.as_p }}
+            <!-- button to submit the form -->
+            <button type="submit">Reserve Room</button>
+        </form>
+    </div>
+{% endblock %}

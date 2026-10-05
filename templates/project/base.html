@@ -1,0 +1,52 @@
+<!-- File: base.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/19/2026
+Description: File that contains the base template that is extended by other templates -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'project/style.css' %}">
+    <title>BU Room Reservations</title>
+</head>
+<body>
+
+    <nav>
+        <!-- link to all of the other links: list of buildings, rooms, and bookings -->
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'build_list' %}">Buildings</a>
+        <a href="{% url 'room_list' %}">Rooms</a>
+        <a href="{% url 'booking_list' %}">Bookings</a>
+
+        <!-- if the user is logged in, show the links to create a booking and logout-->
+        {% if user.is_authenticated %}
+            <a href="{% url 'create_booking' %}">Reserve a Room</a>
+            <a href="{% url 'account_logout' %}?next={{ request.path }}">Logout</a>
+        <!-- if not, show the login link and the account creation link -->
+        {% else %}
+            <a href="{% url 'account_login' %}?next={{ request.path }}">Login with Google</a>
+        {% endif %}
+    </nav>
+    <hr>
+
+    <!-- area where other content from other templates will be shown -->
+    <main>
+        {% block content %}
+        {% endblock %}
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message-box">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </main>
+
+    <!-- just a regular footer -->
+    <footer>
+        <hr>
+        <p>Made by Niyoo Nedi</p>
+    </footer>
+
+</body>
+</html>

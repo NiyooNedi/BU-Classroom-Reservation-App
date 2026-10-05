@@ -1,0 +1,14 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+<div class="auth-card">
+    <h1>Finish Account Setup</h1>
+    <p class="auth-subtitle">Complete your BU Google sign-in.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Continue</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- File: login_error.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/28/2026
+Description: File that contains the login template that is shown when there's a login error -->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+    <!-- initializing a card for the login error message -->
+    <div class="auth-card">
+        <h1>Login Error</h1>
+        <p class="auth-subtitle">
+            Something went wrong during Google sign in. Please try again.
+        </p>
+
+        <!-- link to go back to the login page -->
+        <a href="{% url 'account_login' %}">
+            <button>Back to Login</button>
+        </a>
+    </div>
+{% endblock %}

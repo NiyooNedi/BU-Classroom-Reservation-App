@@ -1,0 +1,22 @@
+<!-- File: logout.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/28/2026
+Description: File that contains the logout page for the app  -->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+
+    <!-- initializing a card for the logout message -->
+    <div class="auth-card">
+        <!-- heading for the logout message -->
+        <h1>Log Out</h1>
+        <!-- subtitle for the logout message -->
+        <p class="auth-subtitle">Are you sure you want to log out?</p>
+        <!-- form for the user to logout -->
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <!-- button to logout -->
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
+{% endblock %}

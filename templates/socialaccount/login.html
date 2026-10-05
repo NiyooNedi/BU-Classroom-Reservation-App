@@ -1,0 +1,23 @@
+<!-- File: login.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/28/2026
+Description: File that contains the login template that is shown right before a user logs in -->
+
+{% extends "project/base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+    <!-- initializing a card for the login message -->
+    <div class="auth-card">
+        <h1>Sign In With Google</h1>
+        <p class="auth-subtitle">
+            You are about to sign in using your Google account.
+        </p>
+
+        <!-- form for the user to login with Google -->
+        <form method="post">
+            {% csrf_token %}
+            <!-- button to continue with Google login -->
+            <button type="submit">Continue with Google</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+<!-- File: room-list.html
+Author: Niyoo Nedi (nnedi@bu.edu), 4/21/2026
+Description: File that contains the template that shows the list of rooms you can reserve -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Rooms</h1>
+
+<!-- form to filter the rooms by building, microphone count, opening time, and projector -->
+<form method="get" id="filter-form" class="filter-bar">
+    <input type="text" name="building" placeholder="Building abbrev.">
+    <!-- input to filter the rooms by microphone count -->
+    <input type="number" name="mic_count" placeholder="Min. mics">
+    <p><strong>Opening Time</strong></p>
+    <!-- input to filter the rooms by opening time -->
+    <input type="time" name="opening_time">
+    <p><strong>Closing Time</strong></p>
+    <!-- input to filter the rooms by closing time -->
+    <input type="time" name="closing_time">
+    <!-- select to filter the rooms by projector -->
+    <select name="projector">
+        <option value="">Projector?</option>
+        <option value="yes">Has projector</option>
+        <option value="no">No projector</option>
+    </select>
+</form>
+
+<!-- button to submit the form -->
+<button type="submit" form="filter-form">Filter</button>
+<a href="{% url 'room_list' %}" class="clear-link button-secondary">Clear</a>
+
+<hr>
+<!-- iterating over all of the rooms in the database -->
+{% for room in rooms %}
+    <div>
+        <!-- showing all of the fields for each room: name, capacity, whether it has a projector, and mic count -->
+        <h3>{{ room.building.abr_name }} {{ room.room_num }}</h3>
+        <p>Capacity: {{ room.capacity }}</p>
+        <p>Projector: {{ room.projector }}</p>
+        <p>Microphone Count: {{ room.mic_count }}</p>
+    </div>
+
+    <p>Microphones:</p>
+    <ul>
+        {% for mic in room.microphones.all %}
+            <li>{{ mic.name }} — {{ mic.brand }} {{ mic.model }} ({{ mic.get_type_display }})</li>
+        {% empty %}
+            <li>No microphones listed.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+<!-- in case there are no rooms -->
+{% empty %}
+    <p>No rooms available.</p>
+{% endfor %}
+
+{% endblock %}
